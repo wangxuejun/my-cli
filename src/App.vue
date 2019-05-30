@@ -1,11 +1,15 @@
 <template>
   <div id="app">
+    
     <router-view></router-view>
+    <br><br>
+    <button @click="open">open</button>
   </div>
 </template>
 <script>
 import mixin from '@/mixins/mixins';
 import http from '@/utils/http'
+import {showFullScreenLoading, hideFullScreenLoading} from '@/utils/loading'
 export default {
   mixins: [mixin],
   data(){
@@ -13,6 +17,8 @@ export default {
     }
   },
   created(){
+    // showFullScreenLoading()
+    
     let config = {
       method: 'GET',
       // url: 'http://localhost:8081/article',
@@ -21,11 +27,24 @@ export default {
       params: {}
     }
     // console.log(http)
-    http(config).then(res => {
-      console.log(res)
-    })
+    // http(config).then(res => {
+    //   console.log(res)
+    //   hideFullScreenLoading()
+    // })
   },
   methods:{
+    open () {
+      showFullScreenLoading()
+       setTimeout(() => {
+        showFullScreenLoading()
+      }, 300)
+      setTimeout(() => {
+        hideFullScreenLoading()
+      }, 1000)
+      setTimeout(() => {
+        hideFullScreenLoading()
+      }, 2000)
+    }
   },
   computed:{
   },

@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class='wrap'>
 		loading
 	</div>
 </template>
@@ -9,5 +9,7 @@
 	}
 </script>
 <style lang="less" scoped>
-	
+	.wrap{
+		height: 1200px;
+	}
 </style>

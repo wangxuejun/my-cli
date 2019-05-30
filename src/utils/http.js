@@ -6,6 +6,7 @@ let http = axios.create({
   baseURL: '/api/',
   withCredentials: false,
   headers: {
+    
     'Content-Type': 'application/json'
   },
   transformRequest: [function (data) {

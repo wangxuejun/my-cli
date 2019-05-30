@@ -5,9 +5,9 @@ import router from './router'
 import store from './vuex'
 import App from './App'
 // import axios from './utils/axios'
-import components from './components/index'
-// import './assets/css/var.less'
-Vue.use(components)
+// import components from './components/index'
+import './assets/css/base.less'
+// Vue.use(components)
 // Vue.prototype.$axios = axios
 Vue.config.productionTip = false
 /* eslint-disable no-new */
