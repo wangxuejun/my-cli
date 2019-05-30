@@ -9,17 +9,16 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable:{},
-    // proxyTable: {
-    //   '/weixin': {
-    //     target: 'http://web.km-union.com/weixin', //源地址
-    //     changeOrigin: true, //改变源
-    //     // pathRewrite: {
-    //     //   '^/api': '/' //路径重写
-    //     //   }
-    //   }
-    // },
-
+    // proxyTable:{},
+    proxyTable: {
+      '/article': {
+        target: 'http://web.km-union.com/weixin', //源地址
+        changeOrigin: true, //改变源
+        pathRewrite: {
+          '^/article': '' //路径重写
+          }
+      }
+    },
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined

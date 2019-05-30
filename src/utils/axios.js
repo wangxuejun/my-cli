@@ -1,17 +1,17 @@
 import axios from 'axios'
-import {showFullScreenLoading, tryHideFullScreenLoading} from './loading'
-import router from '../router'
-import { Toast } from 'vant'
+// import {showFullScreenLoading, tryHideFullScreenLoading} from './loading'
+// import router from '../router'
+// import { Toast } from 'vant'
 Toast.allowMultiple()
-function toastBox (msg = '请求失败') {
-  let toast = Toast.fail({
-    message: msg,
-    duration: 0
-  })
-  setTimeout(() => {
-    toast.clear()
-  }, 1500)
-}
+// function toastBox (msg = '请求失败') {
+  // let toast = Toast.fail({
+  //   message: msg,
+  //   duration: 0
+  // })
+  // setTimeout(() => {
+  //   toast.clear()
+  // }, 1500)
+// }
 let http = axios.create({
   baseURL: '/api/',
   withCredentials: true,
@@ -31,7 +31,7 @@ http.interceptors.request.use(function (config) {
   if (currentTenantId) config.headers.currentTenantId = currentTenantId
   if (!config.showLoading) {
     config.showLoading = true
-    showFullScreenLoading()
+    // showFullScreenLoading()
   }
   return config
 }, function (error) {
@@ -39,18 +39,18 @@ http.interceptors.request.use(function (config) {
 })
 http.interceptors.response.use(function (response) {
   if (response.config.showLoading) {
-    tryHideFullScreenLoading()
+    // tryHideFullScreenLoading()
   }
   let code = response.data.errcode
   if (code === 0) {
     return response
   } else {
-    toastBox(response.data.errmsg)
+    // toastBox(response.data.errmsg)
     return response
   }
 }, function () {
-  toastBox()
-  tryHideFullScreenLoading()
+  // toastBox()
+  // tryHideFullScreenLoading()
   router.push({path: '/error'})
 })
 

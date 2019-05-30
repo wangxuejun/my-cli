@@ -5,6 +5,7 @@
 </template>
 <script>
 import mixin from '@/mixins/mixins';
+import http from '@/utils/http'
 export default {
   mixins: [mixin],
   data(){
@@ -12,6 +13,17 @@ export default {
     }
   },
   created(){
+    let config = {
+      method: 'GET',
+      // url: 'http://localhost:8081/article',
+      url:'http://localhost:8081/article',
+      data: {},
+      params: {}
+    }
+    // console.log(http)
+    http(config).then(res => {
+      console.log(res)
+    })
   },
   methods:{
   },
