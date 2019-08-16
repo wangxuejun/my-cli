@@ -1,49 +1,55 @@
 <template>
-  <div id="app">
-    
+  <div id="app" :class="{hightStyle: night}">
     <router-view></router-view>
-    <br><br>
-    <button @click="open">open</button>
   </div>
-</template>
+</template> 
 <script>
-import mixin from '@/mixins/mixins';
+import mixin from '@/mixins/mixins'
 import http from '@/utils/http'
 import {showFullScreenLoading, hideFullScreenLoading} from '@/utils/loading'
 export default {
   mixins: [mixin],
+  components:{
+    kmTop:() => import ('@/components/config/km-top'),
+    kmNav:() => import ('@/components/config/km-nav')
+  },
   data(){
     return {
     }
   },
   created(){
-    // showFullScreenLoading()
-    
-    let config = {
-      method: 'GET',
-      // url: 'http://localhost:8081/article',
-      url:'http://localhost:8081/article',
-      data: {},
-      params: {}
-    }
-    // console.log(http)
-    // http(config).then(res => {
-    //   console.log(res)
-    //   hideFullScreenLoading()
-    // })
   },
   methods:{
+    login () {
+      let config = {
+        method: 'POST',
+        url:'http://localhost:8081/login',
+        data: {
+          user:'jun',
+          id:1234
+        }
+      }
+      http(config).then(res => {
+        console.log(res)
+        localStorage.setItem('token',res.token)
+        // hideFullScreenLoading()
+      })
+    },
+    test () {
+      let config = {
+        method: 'POST',
+        url:'http://localhost:8081/article',
+        data: {
+          user:'jun2',
+          id:123422
+        }
+      }
+      http(config).then(res => {
+        console.log(res)
+        // hideFullScreenLoading()
+      })
+    },
     open () {
-      showFullScreenLoading()
-       setTimeout(() => {
-        showFullScreenLoading()
-      }, 300)
-      setTimeout(() => {
-        hideFullScreenLoading()
-      }, 1000)
-      setTimeout(() => {
-        hideFullScreenLoading()
-      }, 2000)
     }
   },
   computed:{
@@ -53,11 +59,12 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-  .a{
-    color:red;
-    .b{
-      color:blue;
-    }
+  #app{
+    display: flex;
+    flex-direction: column;
+  }
+  .main{
+    flex: 1;
   }
 </style>
 

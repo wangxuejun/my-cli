@@ -3,12 +3,13 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = {
-  listMeta: {}, // 元数据
-  user: {}, // 用户信息
-  storeId: '', // 商铺Id
-  pageKey: +new Date() // 页面key
+  // 黑夜模式
+  night: false
 }
 const mutations = {
+  toggleNight (state, value) {
+    state.night = !state.night
+  },
   changeKey (state, value) {
     state.pageKey = value
   },

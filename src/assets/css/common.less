@@ -1,0 +1,76 @@
+
+.loadingWrap {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.loadingMask {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: all .3s;
+    &.loadingNone {
+        background-color: rgba(0, 0, 0, 0)!important;
+    }
+}
+.loadingIcon {
+    color: white;
+    font-size: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.loadingAnimation {
+    display: inline-block;
+    animation: loading 1s linear infinite;
+    -webkit-animation: loading 1s linear infinite;
+}
+@keyframes loading {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+// 黑夜模式
+.hightStyle{
+  .kmTop{
+    background-color: @color-night!important;
+    b{
+        color: @color-night!important;
+    }
+  }
+  .kmNav{
+    background-color: @color-night!important;
+    color: @color-Fnight;
+    .kmNav-item{
+      border-bottom: .5px solid @color-Bnight!important;
+    }
+  }
+}
+
+
+
+.circleBase{
+    display: inline-block;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    pointer-events: none;
+    background-color: red;
+    opacity: 0;
+}
+.circleMove{
+    animation: circleTurnBig 1s;
+    animation-fill-mode: forwards;
+}
+@keyframes circleTurnBig{
+    0% {transform:scale(1);opacity: 0;}
+    50% {transform:scale(20);opacity: 1;}
+    100% {transform:scale(20);opacity: 0;}
+}

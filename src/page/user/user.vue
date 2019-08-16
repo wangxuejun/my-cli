@@ -1,12 +1,26 @@
 <template>
 	<div>
-		<p class="main">user</p>
-		<p class='aaa'> aaa</p>
+		<p class="main">{{name}}</p>
+		<button @click='cahnge'>改变</button>
+		<kmButton></kmButton>
 	</div>
 </template>
 <script>
 	export default {
-		name:'userPage'
+		name:'userPage',
+		components:{
+			kmButton:() => import ('@/components/basis/kmButton')
+		},
+		data(){
+			return {
+				name:'hello'
+			}
+		},
+		methods:{
+			cahnge(){
+				this.name = 'hello world'
+			}
+		}
 	}
 </script>
 <style lang="less">

@@ -1,13 +1,15 @@
 import axios from 'axios'
-// import {showFullScreenLoading, tryHideFullScreenLoading} from './loading'
-// import router from '../router'
-// import { Toast } from 'vant'
+import qs from 'qs'
+import {
+  showFullScreenLoading,
+  hideFullScreenLoading
+} from './loading'
 let http = axios.create({
   baseURL: '/api/',
   withCredentials: false,
   headers: {
-    
-    'Content-Type': 'application/json'
+    // 'Content-Type': 'application/json'
+    'Content-Type': 'application/x-www-form-urlencoded'
   },
   transformRequest: [function (data) {
     return data
@@ -15,27 +17,19 @@ let http = axios.create({
 })
 http.defaults.timeout = 15000
 http.interceptors.request.use(function (config) {
-  // if (!config.showLoading) {
-  //   config.showLoading = true
-  // }
-  console.log(config)
+  config.headers['Authorization'] = 'Bearer ' + localStorage.getItem('token')
+  if (config.method === 'post') {
+    config.data = qs.stringify(config.data)
+  }
+  showFullScreenLoading()
   return config
-}, function (error) {
-  return Promise.reject(error)
+}, function (err) {
+  return Promise.reject(err)
 })
 http.interceptors.response.use(function (response) {
-  if (response.config.showLoading) {
-  }
-  console.log(response)
-  return response
-  // let code = response.data.errcode
-  // if (code === 0) {
-  //   return response
-  // } else {
-  //   return response
-  // }
+  hideFullScreenLoading()
+  return response.data
 }, function () {
-  // router.push({path: '/error'})
+  hideFullScreenLoading()
 })
-
 export default http

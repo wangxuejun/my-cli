@@ -14,6 +14,11 @@ const router = new VueRouter({
       }
     },
     {
+      name: 'login',
+      path: '/login',
+      component: resolve => require(['@/page/config/login'], resolve)
+    },
+    {
       name: 'wait',
       path: '/wait',
       component: resolve => require(['@/page/config/wait'], resolve)
@@ -28,42 +33,45 @@ const router = new VueRouter({
       path: '/error',
       component: resolve => require(['@/page/config/error'], resolve)
     },
-    // 首页
+    // 主页
     {
       name: 'index',
-      path: '/index',
+      path: '/',
       component: resolve => require(['@/page/index'], resolve),
-      meta: {
-        login: false
-      }
-    },
-    // 用户
-    {
-      name: 'userIndex',
-      path: '/user',
-      component: resolve => require(['@/page/user/index'], resolve),
-      redirect: '/user/user',
+      redirect: '/user',
       meta: {
         login: false
       },
       children: [
-        // 编辑资料
+        // 用户
         {
-          name: 'user',
-          path: 'user',
-          component: resolve => require(['@/page/user/user'], resolve),
+          name: 'userIndex',
+          path: '/user',
+          component: resolve => require(['@/page/user/index'], resolve),
+          redirect: '/user/user',
           meta: {
             login: false
-          }
-        },
-        // 编辑资料
-        {
-          name: 'modify',
-          path: 'modify',
-          component: resolve => require(['@/page/user/modify'], resolve),
-          meta: {
-            login: false
-          }
+          },
+          children: [
+            // 编辑资料
+            {
+              name: 'user',
+              path: 'user',
+              component: resolve => require(['@/page/user/user'], resolve),
+              meta: {
+                login: false
+              }
+            },
+            // 编辑资料
+            {
+              name: 'modify',
+              path: 'modify',
+              component: resolve => require(['@/page/user/modify'], resolve),
+              meta: {
+                login: false
+              }
+            }
+          ]
         }
       ]
     }
